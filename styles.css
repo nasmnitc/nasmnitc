@@ -1,0 +1,66 @@
+.w3-teal {
+	background-color: #c43235 !important;
+}
+
+#mySidebar {
+		background-color: #252839 !important;
+		color: white;
+}
+
+.w3-button {
+
+}
+
+.active, .w3-button:hover {
+  background-color: #369693  !important;
+  color: white  !important;
+  border-left: 6px solid #c43235 !important;
+}
+
+.w3-main	 {
+	font-family: 'Raleway', sans-serif;
+	font-size: 1.2em;
+}
+
+h1, h2, h3{
+
+    font-family: 'Roboto Slab', serif;
+    color: #252839;
+
+}
+
+.w3-sidebar {
+	font-family: 'Raleway', sans-serif;
+	font-size: 1.1	em;
+
+}
+
+hr.style-eight {
+height: 7px;
+border: 1;
+box-shadow: inset 0 9px 9px -3px #369693;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+-ms-border-radius: 5px;
+-o-border-radius: 5px;
+border-radius: 5px;
+
+}	
+
+
+/* Page content */
+.content {
+  padding: 16px;
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 102px;
+}
