@@ -1,24 +1,17 @@
 <!DOCTYPE html>
 <html>
-<title>W3.CSS</title>
+<title>NASM Manual NITC</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
-
-
 <link href="https://fonts.googleapis.com/css?family=Croissant+One" rel="stylesheet">
-
- <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-  
 <link href="https://fonts.googleapis.com/css?family=Fjalla+One|Raleway|Roboto+Slab" rel="stylesheet">
 
 <body>
 
 
-<div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left" style="width:300px;" id="mySidebar">
+<div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left" style="width:200px;" id="mySidebar">
   <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
   <a href="#" class="w3-bar-item w3-button nav-item">HOME</a>
   <a href="index.html" class="w3-bar-item w3-button nav-item active"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
@@ -26,7 +19,7 @@
   <a href="#" class="w3-bar-item w3-button nav-item">Link 3</a>
 </div>
 
-<div class="w3-main" style="margin-left:300px;">
+<div class="w3-main" style="margin-left:200px;">
 
 <div class="w3-teal" id="myHeader">
   <button class="w3-button w3-teal w3-xlarge w3-hide-large" onclick="w3_open()">&#9776;</button>
@@ -41,20 +34,20 @@
   <hr width="100%" align="center" style="margin-left: 100%; margin-right: 30%">  
 <p>
 
-<h3>Machine Language</h2>
+<h3>Machine Language</h3>
 
 Machine language consists of instructions in the form of 0s and 1s. Every CPU
 has its own machine language. It is very difficult to write programs using the
 combination of 0s and 1s. So we rely upon either assembly language or high level
 language for writing programs.
 
-<h3>Assembly Language</h2>
+<h3>Assembly Language</h3>
 
 An assembly language is a low-level programming language for microprocessors
 and other programmable devices.Assembly language uses a mnemonic to represent
 each low-level machine instruction.
 
-<h3>Why Assembly Language ?</h2>
+<h3>Why Assembly Language ?</h3>
 
 The symbolic programming of Assembly Language is easier to understand and
 saves a lot of time and effort of the programmer. When you study assembly lan-
@@ -65,28 +58,107 @@ of Linux kernel and some system softwares are written in assembly language. In
 programming languages like C, C++ we can even embed assembly language instructions into it using functions like asm( ); (Refer to Chapter 8 of The Intel
 Microprocessors by Barry B. Brey for more details)
 
-<h3>What is NASM ?</h2>
+<h3>What is NASM ?</h3>
 
 The Netwide Assembler is an assembler and disassembler for the Intel X86 ar-
 chitecture(explained in subsequent section).It can be used to write 16-bit, 32-bit
 (IA-32) and 64-bit (x86-64) programs. NASM is considered to be one of the most
 popular assemblers for Linux.
 
-<h3>Computer Architecture</h2>
+<h3>Computer Architecture</h3>
 
 The basic operational design of a computer is called architecture.It is a set of rules
 and methods that describe the functionality,organization and implementation of
 computer systems.X86 architecture follows Von Newmann architecture which is
 based on stored program concept.
 
-<h3>Von Neumann Architecture</h2>
+<h3>Von Neumann Architecture</h3>
 
 A Von Neumann architecture machine, designed by physicist and mathematician
 John von Neumann (19031957) is a theoretical design for a stored program com-
 puter that serves as the basis for almost all modern computers. A von Neumann
-machine consists of a central processor with an arithmetic/
+machine consists of a central processor with an arithmetic/logic unit and a control
+unit, a memory, mass storage, and input and output.
+
+<h3>X86 Architecture</h3>
+
+The x86 architecture is an Instruction Set Architecture (ISA) series for computer
+processors. Developed by Intel Corporation, x86 architecture defines how a proces-
+sor handles and executes different instructions passed from the operating system
+(OS) and software programs. The x in x86 denotes ISA version.
+Key features include:
+<ul>
+  <li> Provides a logical framework for executing instructions through a processor.</li>
+  <li>Allows software programs and instructions to run on any processor in the
+Intel 8086 family.</li>
+  <li>Provides procedures for utilizing and managing the hardware components of
+a central processing unit (CPU).</li>
+</ul>
+
+<div><img class="responsive" src="images/von_newmann.png"></div>
+<p align="center">Von Neumann Architecture</p>
+
+<hr style="border-color: black;">
+Historically there have been 2 types of Computers: Fixed Program Computers
+Their function is very specific and they cant be programmed, e.g. Calculators.
+Stored Program Computers These can be programmed to carry 36 out many dif-
+ferent tasks, applications are stored on them, hence the name.
+<hr style="border-color: black;">
+
+<h3>Processor</h3>
+
+Processor is the brain of the computer. It performs all mathematical, logical and
+control operations of a computer. It is that component of the computer which
+executes all the instructions given to it in the form of programs. It interacts with
+I/O devices, memory (RAM) and secondary storage devices and thus implements
+the instructions given by the user.
+<br><br>
+The term processor is used interchangeably with the term central processing unit
+(CPU), although strictly speaking, the CPU is not the only processor in a com-
+puter.
+<br>
+
+<img class="responsive" src="images/processor.jpeg">
+<p align="center">Intel Core i9</p>
+
+<h3>Registers</h3>
+Registers are the most immediately accessible memory units for the processor.
+They are the fastest among all the types of memory. They reside inside the processor and the processor can access the contents of any register in a single clock
+cycle. It is the working memory for a processor, i.e , if we want the processor to
+perform any task it needs the data to be present in any of its registers.
+
+
+<p style="border: 1px solid black; border-radius: 10px; padding: 15px;">
+<span style="font-weight: bold;" align="center">What is a clock cycle? </span><br>
+In computers, the clock cycle is the amount of time between two pulses of
+an oscillator. It is a single increment of the central processing unit (CPU)
+clock during which the smallest unit of processor activity is carried out.
+The clock cycle helps in determining the speed of the CPU, as it is
+considered the basic unit of measuring how fast an instruction can be
+executed by the computer processor.
 </p>
-<script src="https://gist.github.com/dheerajmohan/37d45b344d5280bfb2b4e993ac372dc4.js"></script>
+
+The series of processors released on or after 80186 like 80186, 80286, 80386, Pentium etc are referred to as x86 or 80x86 processors. The processors released on or
+after 80386 are called I386 processors. They are 32 bit processors internally and
+externally. So their register sizes are generally 32 bit. In this section we will go
+through the I386 registers.
+
+<p style="border: 1px solid black; border-radius: 10px; padding: 15px;">
+Intel maintains its backward compatibility of instruction sets, i.e, we can
+run a program designed for an old 16 bit machine in a 32bit machine.
+That is the reason why we can install 32-bit OS in a 64 bit PC. The only
+problem is that, the program will not use the complete set of registers and
+other available resources and thus it will be less efficient.
+</p>
+
+A register may hold an instruction, a storage address, or any kind of data (such as
+a bit sequence or individual characters). A register must be large enough to hold
+an instruction - for example, in a 64-bit computer, a register must be 64 bits in
+length.
+
+</p>
+
+
 </div>
    
 </div>
