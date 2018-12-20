@@ -72,6 +72,10 @@ border-radius: 5px;
   display: block;
   margin-left: auto;
   margin-right: auto;
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  text-align: center;
 }
 
 @media (min-width: 1025px){
