@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<title>NASM Manual NITC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Croissant+One" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Fjalla+One|Raleway|Roboto+Slab" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Tajawal:300" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet"> 
+
+<body>
+
+
+<div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left" style="width:200px;" id="mySidebar">
+  <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
+  <a href="#" class="w3-bar-item w3-button nav-item">HOME</a>
+  <a href="../index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="chapters/chapter3.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 3 - Basic I/O in NASM</a>
+  <a href="chapters/chapter4.html" class="w3-bar-item w3-button nav-item active"> <i class="fa fa-book"></i> Chapter 4 - Introduction to Programming in NASM</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+
+</div>
+
+<div class="w3-main" style="margin-left:200px;">
+
+<div class="w3-teal">
+  <button class="w3-button w3-teal w3-xlarge w3-hide-large" onclick="w3_open()">&#9776;</button>
+  <div class="w3-container">
+    <h1 style="font-family: 'Croissant One', cursive; text-shadow: 2px 2px 4px #3d1010; color: white;">NASM Manual NITC</h1>
+  </div>
+</div>
+
+<div class="w3-container">
+  <h1 align="center">Chapter 4 - Introduction to Programming in NASM</h1>
+  <hr class="style-eight" max-width="50%" style="margin-left: 35%; margin-right: 35%">
+
+<p>
+
+Now that we have gone through all the basics required for creating a program, let's begin. Like all programming lessons, we will first learn how to create a Hello World program. Programming in NASM is easy if you understand how each construct is used and implemented. A transition from C like language can be frustrating at first, but let's take it step by step. We will learn to program by translating code snippets in C language to assembly code. 
+
+<h3>Hello World Program</h3>
+
+As discussed earlier, the whole program is divided into 3 sections, namely code section (section .text), section for uninitalised variables (section .bss) and section for initialised variables (section .text). 
+<br>
+section .text is the place from where the execution starts in NASM program,
+analogous to the main() function in C-Programming.
+
+<ol>
+  <li>
+    Let's store the string "Hello World" into a variable named str. We are going to print that string as the output
+  </li>
+  <span style="font-weight: bold;">Pseudo Code:</span>
+  <br>
+  <span class="code">char str[13] = "Hello World";</span>
+  <br>
+  <span style="font-weight: bold;">NASM Code:</span>
+  <br>
+  <script src="https://gist.github.com/nasmnitc/62a5bc79d0b1077ecc763101b6ba952e.js"></script>
+  NB: Using equ we declare constants, ie. their value won’t change during execution. $-string will return the length of string variables in bytes (ie. number of characters)
+  <li>
+    Now we need to print this variable onto the screen. For that we use the write system call.
+  </li>
+  <span style="font-weight: bold;">Pseudo Code:</span>
+  <br>
+  <span class="code">printf("%s",str);</span>
+  <br>
+  <span style="font-weight: bold;">NASM Code:</span>
+  <br>
+  <script src="https://gist.github.com/nasmnitc/0c402f7a90ae4b38a8514891c94ba52c.js"></script>
+  <li>
+    Now since we have printed the text, let's exit the program. We use the exit system call for the same
+    <br>
+    <span style="font-weight: bold;">Pseudo Code:</span>
+    <br>
+    <span class="code">return 0;</span>
+    <br>
+    <span style="font-weight: bold;">NASM Code:</span>
+    <br>
+    <script src="https://gist.github.com/nasmnitc/c611374b0457793ed11549df05c7a8ea.js"></script>
+  </li>
+  <li>
+    section .text is the place from where the execution starts in NASM program, analogous to the main() function in C-Programming. So let's put the print and exit parts into the section.
+  </li>
+
+  The final program looks like this:
+  <script src="https://gist.github.com/nasmnitc/02a60856633470f0b4a733853e4a0dc2.js"></script>
+</ol>
+
+</p>
+
+
+
+
+
+</div>
+   
+</div>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+}
+
+// When the user scrolls the page, execute myFunction
+window.onscroll = function() {myFunction()};
+
+// Get the header
+var header = document.getElementById("myHeader");
+
+// Get the offset position of the navbar
+var sticky = header.offsetTop;
+
+// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+} 
+</script>
+     
+</body>
+</html>

@@ -93,3 +93,9 @@ table, th, td {
   padding: 15px;
   text-align: center;
 }
+
+.code{
+  font-family: 'Source Code Pro', monospace;
+  font-size: 0.8em;
+  font-weight: lighter;
+}
