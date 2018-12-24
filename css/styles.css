@@ -73,7 +73,6 @@ border-radius: 5px;
   margin-left: auto;
   margin-right: auto;
   border-collapse: collapse;
-  width: 100%;
   border: 1px solid #ddd;
   text-align: center;
 }
@@ -98,4 +97,7 @@ table, th, td {
   font-family: 'Source Code Pro', monospace;
   font-size: 0.8em;
   font-weight: lighter;
+
+
 }
+
