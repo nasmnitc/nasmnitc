@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<title>NASM Manual NITC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Croissant+One" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Fjalla+One|Raleway|Roboto+Slab" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Tajawal:300" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet"> 
+
+<body>
+
+
+<div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left" style="width:200px;" id="mySidebar">
+  <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
+  <a href="#" class="w3-bar-item w3-button nav-item">HOME</a>
+  <a href="../index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="chapters/chapter3.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 3 - Basic I/O in NASM</a>
+  <a href="chapters/chapter4.html" class="w3-bar-item w3-button nav-item "> <i class="fa fa-book"></i> Chapter 4 - Introduction to Programming in NASM</a>
+  <a href="chapters/chapter5.html" class="w3-bar-item w3-button nav-item "> <i class="fa fa-book"></i> Chapter 5 - Integer Handling</a>
+  <a href="chapters/chapter6.html" class="w3-bar-item w3-button nav-item "> <i class="fa fa-book"></i> Chapter 6 - Subprograms</a>
+  <a href="chapters/chapter7.html" class="w3-bar-item w3-button nav-item active"> <i class="fa fa-book"></i> Chapter 7 - Arrays and Strings</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+
+</div>
+
+<div class="w3-main" style="margin-left:200px;">
+
+<div class="w3-teal">
+  <button class="w3-button w3-teal w3-xlarge w3-hide-large" onclick="w3_open()">&#9776;</button>
+  <div class="w3-container">
+    <h1 style="font-family: 'Croissant One', cursive; text-shadow: 2px 2px 4px #3d1010; color: white;">NASM Manual NITC</h1>
+  </div>
+</div>
+
+<div class="w3-container">
+  <h1 align="center">Chapter 7 - Arrays and Strings</h1>
+  <hr class="style-eight" max-width="50%" style="margin-left: 35%; margin-right: 35%">
+
+<p>
+
+An Array is a continuous storage block in memory. Each element of the array have the same size. We access each element of the array using:
+
+<ol>
+  <li>Base address / address of the first element of the array.</li>
+  <li> Size of each element of the array.</li>
+  <li>Index of the element we want to access.</li>
+</ol>
+
+<h3>One Dimensional Arrays</h3>
+
+In NASM there is no array element accessing/dereferencing operator like [ ] in C / C++ / Java using which we can access each element. Here we compute the address of each element using an iterative control structure and traverse though the elements of the array.
+
+<ol>
+  <li>
+    <span style="font-weight: bold;">Declaring/ Initializing an array</span>
+  </li>
+  <script src="https://gist.github.com/nasmnitc/01f875c099b1943abd6e1ffa5e38cf64.js"></script>
+  We can also use TIMES keyword to repeat each element with a given value and thus easily create array elements:
+  <script src="https://gist.github.com/nasmnitc/7c309c3d7b09ac73ed4714d67494541e.js"></script>
+
+
+  <li>
+    <span style="font-weight: bold;">Reading an n-sized array</span>
+  </li>
+  <span style="font-weight: bold;">Pseudo Code:</span>
+      <br>
+  <span class="code">
+      <pre>
+    i=0
+    while(i < n)
+       read(num)
+       *(arr+i)=num
+       i++
+    endwhile
+      </pre>
+      </span>
+  <span style="font-weight: bold;">NASM Code:</span>
+  <script src="https://gist.github.com/nasmnitc/19c968a6d76b42ac4a862455fe2470f9.js"></script>
+
+  <li>
+    <span style="font-weight: bold;">Printing an n-sized array</span>
+  </li>
+  <span style="font-weight: bold;">Pseudo Code:</span>
+      <br>
+  <span class="code">
+      <pre>
+  while(i < n)
+     print ∗(arr+i)
+     i++
+  endwhile
+  </pre>
+      </span>
+      <br>
+  <span style="font-weight: bold;">NASM Code:</span>
+  <script src="https://gist.github.com/nasmnitc/d4d25779f2c094e7a1a955e673322a9c.js"></script>  
+
+</ol>
+
+The label which we use to create array( eg: 'array1' )acts as a pointer to the base address of the array and we can access each element by adding suitable offset to this base address and then dereferencing it.
+
+<script src="https://gist.github.com/nasmnitc/4dd74628682a0732659b120a5c63bd83.js"></script>
+
+  <span style="font-weight: bold;">Read an array and find the average of the numbers in the array</span>
+
+  <script src="https://gist.github.com/nasmnitc/3a8ae9868dcdd47c701dba91e5437de3.js"></script>
+
+The general syntax of using array offset is:
+<br>
+  <span class="code">
+      <pre>
+      [basereg + factor *indexreg + constant ]
+  </pre>
+</span>
+
+
+<ul>
+  <li>basereg: It should be general purpose register containing the base address of the array.</li>
+  <li>factor: It can be 1, 2, 4 or 8.</li>
+  <li>indexreg: It can also be any of the general purpose registers.</li>
+  <li>constant: It should be an integer.</li>
+</ul>
+Example:
+<span class="code">
+      <pre>
+    byte[ebx+12]
+    word[ebp + 4 * esi]
+    dword[ebx - 12]
+  </pre>
+</span>
+A sample program to search an array for an element (Traversal) is given in the appendix
+
+<h3>Strings</h3>
+
+Strings are stored in memory as array of characters. Each character in English alphabet has an 8-bit unique numeric representation called ASCII. When we read a string from the user, the user will give an enter key press at the end of the string. When we read that using the read system call, the enter press will be replaced with a new line character with ASCII code 10 . Thus we can detect the end of the string.
+<br>
+Now let's get started to work with strings.
+
+
+</p>
+</div>
+   
+</div>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+}
+
+// When the user scrolls the page, execute myFunction
+window.onscroll = function() {myFunction()};
+
+// Get the header
+var header = document.getElementById("myHeader");
+
+// Get the offset position of the navbar
+var sticky = header.offsetTop;
+
+// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+} 
+</script>
+     
+</body>
+</html>
