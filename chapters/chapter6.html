@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<title>NASM Manual NITC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Croissant+One" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Fjalla+One|Raleway|Roboto+Slab" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Tajawal:300" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet"> 
+
+<body>
+
+
+<div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left" style="width:200px;" id="mySidebar">
+  <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
+  <a href="#" class="w3-bar-item w3-button nav-item">HOME</a>
+  <a href="../index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="chapters/chapter3.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 3 - Basic I/O in NASM</a>
+  <a href="chapters/chapter4.html" class="w3-bar-item w3-button nav-item "> <i class="fa fa-book"></i> Chapter 4 - Introduction to Programming in NASM</a>
+  <a href="chapters/chapter6.html" class="w3-bar-item w3-button nav-item "> <i class="fa fa-book"></i> Chapter 5 - Integer Handling</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item active"> <i class="fa fa-book"></i> Chapter 6 - Subprograms</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+
+</div>
+
+<div class="w3-main" style="margin-left:200px;">
+
+<div class="w3-teal">
+  <button class="w3-button w3-teal w3-xlarge w3-hide-large" onclick="w3_open()">&#9776;</button>
+  <div class="w3-container">
+    <h1 style="font-family: 'Croissant One', cursive; text-shadow: 2px 2px 4px #3d1010; color: white;">NASM Manual NITC</h1>
+  </div>
+</div>
+
+<div class="w3-container">
+  <h1 align="center">Chapter 6 - Subprograms</h1>
+  <hr class="style-eight" max-width="50%" style="margin-left: 35%; margin-right: 35%">
+
+<p>
+
+We have now covered the basics of programming in assembly code. Many a times, we might have to repeat the same code in the program and that is where we use functions in languages like C. Let's see how it is done in assembly language.
+<br><br>
+The concept of subprograms can be used heavily in assembly language, since input and output operations require more than one line of code. Making them into subprograms not only makes the code smaller, but also helps you understand and debug the code better. It is highly reccommended that you start using subprograms in your code from the very start of programming in assembly language.
+
+<h3>CALL & RET Statements</h3>
+
+In NASM subprograms are implemented using the call and ret instructions. The general syntax is as follows: 
+<br>
+<span class="code">
+      <pre>
+  ;main code....
+  -------------
+  -------------
+  
+  call function_name
+  -------------
+  -------------
+  ;rest of the code....
+  
+
+  function_name:            ;Label for subprogram
+  ----------
+  ----------
+  ;function code....
+  ----------
+  ----------
+  ret
+
+      </pre>
+      </span>
+<ol>
+  <li>When we use the CALL instruction, address of the next instruction will be copied to the system stack and it will jump to the subprogram. ie. ESP will be decreased by 4 units and address of the next instruction will go over there.</li>
+  <li>When we call the ret towards the end of the sub-program then the address being pushed to the top of the stack will be restored and control will jump to that</li>
+
+</ol>
+
+<h3>Calling Conventions</h3>
+The set of rules that the calling program and the subprogram should obey to pass parameters are called calling conventions. Calling conventions allow a subprogram to be called at various parts of the code with different data to operate on. The data may be passed using system registers / memory variables / system stack. If we are using system stack, parameters should be pushed to system stack before the CALL statement and remember to pop off, preserve and to push back the return address within the sub program which will be in the top of the stack.
+<br><br>
+<span style="font-style: italic;">NB: One major advantage of subprograms that you can exploit is by creating subprograms for input and output, as they are two code components which appear in almost all the programs you are going to write. As the codes are quite lengthy, repeating the code for each input and output will make your code even lengthier, making debugging and understanding the code a tedious task. In the program given below, three subprograms are used, one for input, one for output and the last one for calculating the sum. It is suggested that you use subprograms for input and ouput from now on.
+</span>
+<br><br>
+Now, let's see an example on how to use subprograms effectively to simplify your code. Below is a program which uses subprograms to calculate the sum of 10 input integers.
+
+<script src="https://gist.github.com/nasmnitc/3611f337fc770c021953247e3d497eaa.js"></script>
+
+<h3>Recursive Sub-routine</h3>
+A subprogram which calls itself again and again recursively to calculate the return value is called recursive sub-routine. We could implement recursive sub-routine for operations like calculating factorial of a number very easily in NASM. A program to print fibonacci series up to a number using recursive subprogram is given in the appendix.
+
+<h3>Using C Library functions in NASM</h3>
+We can embed standard C library functions into our NASM Program especially for I/O operations. If we would like to use that then we have to follow C’s calling conventions given below:
+
+<ul>
+  <li>
+    Parameters are passed to the system stack from left to right order.
+  </li>
+  Eg: <span class="code">
+      <pre>
+        printf(“\%d”,x)
+      </pre>
+      </span>
+    Here value of x must be pushed to system stack and then the format string.
+    <li>
+      C-Function won’t pop out the parameters automatically, so it is our duty to restore the status of stack pointers(ESP and EBP) after the function being called.
+    </li>
+</ul>
+<span style="font-weight: bold;">Example: Reading an integer using the C-Functions</span>
+<script src="https://gist.github.com/nasmnitc/03d6c6abad048ba05b48137aa4cf9f64.js"></script>
+
+<h3>Assembling and executing the code</h3>
+<ol>
+  First we have to assemble the code to object code with NASM Assembler, then we have to use gcc compiler to make the executable code.
+  <li>nasm -f elf -o int.o int.asm</li>
+  <li>gcc int.o -o int</li>
+  <li> ./int</li>
+</ol>
+
+
+</p>
+
+
+
+
+
+</div>
+   
+</div>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+}
+
+// When the user scrolls the page, execute myFunction
+window.onscroll = function() {myFunction()};
+
+// Get the header
+var header = document.getElementById("myHeader");
+
+// Get the offset position of the navbar
+var sticky = header.offsetTop;
+
+// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+} 
+</script>
+     
+</body>
+</html>

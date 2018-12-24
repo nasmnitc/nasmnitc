@@ -3,10 +3,11 @@
 <title>NASM Manual NITC</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Croissant+One" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Fjalla+One|Raleway|Roboto+Slab" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Tajawal:300" rel="stylesheet"> 
 
 <body>
 
@@ -17,13 +18,16 @@
   <a href="index.html" class="w3-bar-item w3-button nav-item active"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
   <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
   <a href="chapters/chapter3.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 3 - Basic I/O in NASM</a>
-  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
   <a href="chapters/chapter4.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
   <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
   <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
   <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
 
-<div class="w3-main" style="margin-left:200px;">
+</div>
+
+
+<div class="w3-main" style="margin-left:200px; ">
 
 <div class="w3-teal" id="myHeader">
   <button class="w3-button w3-teal w3-xlarge w3-hide-large" onclick="w3_open()">&#9776;</button>
@@ -295,9 +299,12 @@ or any other I/O devices (for both reading and writing). As the size of
 data bus increases, it can transfer more data in a single stretch. The
 size of data bus in common processors by Intel are given below.</p>
 
-<table class="responsive" border = "1" align="center" bordercolor = "maroon">
+
+<div style="overflow-x:auto;">
+<table border="1px solid black" align="center">
 <tr><th>Processor</th>
     <th>Bus size</th>
+
 <tr>
 <tr><td>8088, 80188</td>
     <td>8 bit</td>
@@ -312,6 +319,7 @@ size of data bus in common processors by Intel are given below.</p>
     <td>64 bit</td>
 </tr>
 </table>
+</div>
 
 </li>
 <li>Address Bus :<br>
@@ -332,7 +340,7 @@ even if we add more than 4 GB of RAM in a 32 bit PC, we cannot find
 more than 4 GB of available memory.</p>
 
 <div style="overflow-x:auto;">
-<table class="responsive" border = "1" align="center" bordercolor = "maroon">
+<table border="1px solid black"  align="center">
 <tr><th>Processor</th>
     <th>Address Bus Width</th>
     <th>Maximum Addressable RAM size</th>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<title>NASM Manual NITC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Croissant+One" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Fjalla+One|Raleway|Roboto+Slab" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Tajawal:300" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet"> 
+
+<body>
+
+
+<div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left" style="width:200px;" id="mySidebar">
+  <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
+  <a href="#" class="w3-bar-item w3-button nav-item">HOME</a>
+  <a href="../index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="chapters/chapter3.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 3 - Basic I/O in NASM</a>
+  <a href="chapters/chapter4.html" class="w3-bar-item w3-button nav-item "> <i class="fa fa-book"></i> Chapter 4 - Introduction to Programming in NASM</a>
+  <a href="chapters/chapter5.html" class="w3-bar-item w3-button nav-item active"> <i class="fa fa-book"></i> Chapter 5 - Integer Handling</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+
+</div>
+
+<div class="w3-main" style="margin-left:200px;">
+
+<div class="w3-teal">
+  <button class="w3-button w3-teal w3-xlarge w3-hide-large" onclick="w3_open()">&#9776;</button>
+  <div class="w3-container">
+    <h1 style="font-family: 'Croissant One', cursive; text-shadow: 2px 2px 4px #3d1010; color: white;">NASM Manual NITC</h1>
+  </div>
+</div>
+
+<div class="w3-container">
+  <h1 align="center">Chapter 5 - Integer Handling</h1>
+  <hr class="style-eight" max-width="50%" style="margin-left: 35%; margin-right: 35%">
+
+<p>
+
+Integers are stored as characters in NASM. This chapter describes how to read and print integers. We have already skimmed through the basic operations in integer handling (add, sub, mul, div) in Chapter 3. Here, we will look at sample programs that will make use of these operations. 
+   
+
+<ol>
+  <li>
+    <h3>Declaring an integer</h3>
+  </li>
+  <script src="https://gist.github.com/nasmnitc/14316363bc4e4506ebf966025c54b331.js"></script>
+  Here we have reserved 10 bytes/words/double words for the memory location 'var'
+  <li>
+    <h3>Reading a single digit</h3>
+  </li>
+  To read a single digit, we will read it as a single character and then subtract 30h from it (ASCII of 0 = 30h). This is to get the actual value of that number in that variable.
+  <script src="https://gist.github.com/nasmnitc/2e099f7d5cd2e7f3759b83b905db5c9e.js"></script>
+  Note that the single digit taken as input here is stored in the first byte of 'var'. If 'var' was declared as a word/double word, the size of the input stored in the edx register should be changed accordingly to word[size] or dword[size].
+
+  <li>
+    <h3>Reading a multi-digit number</h3>
+  </li>
+  To read a multi-digit number, we read the input character by character (here, digit by digit) until we obtain the enter-key. Each digit is multiplied with 10 and added to the next digit to obtain the original number. 
+  <br>
+    <span style="font-weight: bold;">Pseudo Code:</span>
+    <br>
+    <span class="code">
+      <pre>
+      while(temp!=enterkey)
+        num=0
+        read(temp)
+        num=numx10+temp
+      endwhile
+      </pre>
+    </span>
+    <span style="font-weight: bold;">NASM Code:</span>
+    <br>
+    <script src="https://gist.github.com/nasmnitc/ab119958559dc52fee2641af7d088766.js"></script>
+    <li>
+    <h3>Printing a number</h3>
+    </li>
+    Unlike when we're reading a number, there is no end character like the enter-key marking the number's last digit. Here, we extract each digit from the number and push it to the stack. We also keep a count of the number of digits in the number. Using this count, the digits are popped out of the stack and printed in order.
+    <br>
+      <span style="font-weight: bold;">Pseudo Code:</span>
+      <br>
+      <span class="code">
+      <pre>
+    count=0
+    while (num!=0)
+       temp=num%10
+       count++
+       push(temp)
+       num=num/10
+    endwhile
+    while(count!=0)
+       temp=pop()
+       print(temp)
+       count- -
+    endwhile
+      </pre>
+      </span>
+      <span style="font-weight: bold;">NASM Code:</span>
+      <br>
+      <script src="https://gist.github.com/nasmnitc/bd883e5e8a86bbb96436d671b32147fb.js"></script>
+
+      <h3>Example Program</h3>
+      Read 2 numbers and find their GCD.
+      <br>
+      <span style="font-weight: bold;">Pseudo Code:</span>
+    <br>
+    <span class="code">
+      <pre>
+    read(num1)
+    read(num2)
+    while(1)
+       if(num1%num2==0)
+       goto endloop
+       temp=num1%num2
+       num1=num2
+       num2=temp
+    endwhile
+    endloop:
+    print(num2)
+      </pre>
+    </span>
+    <span style="font-weight: bold;">NASM Code:</span>
+    <br>
+
+
+
+
+
+
+
+
+ </ol>
+
+</p>
+
+
+
+
+
+</div>
+   
+</div>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+}
+
+// When the user scrolls the page, execute myFunction
+window.onscroll = function() {myFunction()};
+
+// Get the header
+var header = document.getElementById("myHeader");
+
+// Get the offset position of the navbar
+var sticky = header.offsetTop;
+
+// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+} 
+</script>
+     
+</body>
+</html>

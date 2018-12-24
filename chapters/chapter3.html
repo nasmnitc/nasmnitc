@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<title>NASM Manual NITC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Croissant+One" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Fjalla+One|Raleway|Roboto+Slab" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Tajawal:300" rel="stylesheet"> 
+
+<body>
+
+
+<div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left" style="width:200px;" id="mySidebar">
+  <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
+  <a href="#" class="w3-bar-item w3-button nav-item">HOME</a>
+  <a href="../index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="chapters/chapter3.html" class="w3-bar-item w3-button nav-item active"> <i class="fa fa-book"></i> Chapter 3 - Basic I/O in NASM</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+
+</div>
+
+<div class="w3-main" style="margin-left:200px;">
+
+<div class="w3-teal">
+  <button class="w3-button w3-teal w3-xlarge w3-hide-large" onclick="w3_open()">&#9776;</button>
+  <div class="w3-container">
+    <h1 style="font-family: 'Croissant One', cursive; text-shadow: 2px 2px 4px #3d1010; color: white;">NASM Manual NITC</h1>
+  </div>
+</div>
+
+<div class="w3-container">
+  <h1 align="center">Chapter 3 - Basic I/O in NASM</h1>
+  <hr class="style-eight" max-width="50%" style="margin-left: 35%; margin-right: 35%">
+
+<p>
+  In this chapter, we will learn how to obtain user input and how to return the out-
+put to the output device. The input from the standard input device (Keyboard)
+and Output to the standard output device (monitor) in a NASM Program is im-
+plemented using the Operating Systems read and write system call. Interrupt no:
+80h is given to the software generated interrupt in Linux Systems. Applications
+implement the System Calls using this interrupt. When an application triggers int
+80h, then OS will understand that it is a request for a system call and it will refer
+the general purpose registers to find out and execute the exact Interrupt Service
+Routine (ie. System Call here).The standard convention to use the software 80h
+interrupt is, we will put the system call no: in eax register and other parameters
+needed to implement the system calls in the other general purpose registers. Then
+we will trigger the 80h interrupt using the instruction INT 80h. Then OS will
+implement the system call.
+ <ol>
+   <li>
+     <span style="font-weight: bold;">Exit System Call</span>
+   </li>
+     <br>
+     <ul>
+       <li>This system call is used to exit from the program</li>
+       <li>System call number for exit is 1, so it is copied to eax reg.</li>
+       <li>Output of a program if the exit is successful is 0 and it is being passed
+as a parameter for exit( ) system call. We need to copy 0 to ebx reg.</li>
+        <li>Then we will trigger INT 80h</li>
+     </ul>
+ 
+
+<script src="https://gist.github.com/nasmnitc/c611374b0457793ed11549df05c7a8ea.js"></script>
+
+   <li>
+     <span style="font-weight: bold;">Read System Call</span>
+   </li>
+     <br>
+     <ul>
+       <li>This system call is used to exit from the program</li>
+       <li>System Call Number for Read is 3. It is copied to eax.</li>
+       <li>The standard Input device(keyboard) is having the reference number 0
+and it must be copied to ebx reg.</li>
+        <li>We need to copy the pointer in memory, to which we need to store the
+input string to ecx reg.</li>
+        <li>We need to copy the number of characters in the string to edx reg.</li>
+        <li>Then we will trigger INT 80h.</li>
+        <li>We will get the string to the location which we copied to ecx reg.</li>
+     </ul>
+   
+
+
+ <script src="https://gist.github.com/nasmnitc/1e3a108b16488df893de87025772276e.js"></script>
+
+ <ul>
+   <li>This method is also used for reading integers and it is a bit tricky. If we need to read a single digit, we will read it as a single character and then subtract 30h from it(ASCII of 0 = 30h). Then we will get the actual value of that number in that variable.</li>
+ </ul>
+
+<script src="https://gist.github.com/nasmnitc/1ede2cd705a44150fd12ab1b6c4c3eba.js"></script>
+  <li>
+     <span style="font-weight: bold;">Write System Call</span>
+   </li>
+     <br>
+     <ul>
+       <li>This system call can be used to print the output to the monitor</li>
+       <li>Using this we could write only string / character.</li>
+       <li>System Call Number for Write is 4. It is copied to eax.</li>
+       <li>The standard Output device(Monitor) is having the reference number 1 and it must be copied to ebx reg.</li>
+       <li>We need to copy the pointer in memory, where the output sting resides to ecx reg.</li>
+       <li>We need to copy the number of characters in the string to edx reg.</li>
+       <li>Then we will trigger INT 80h.</li>
+
+     
+     See the below given example which is equivalent to the C statement printf()
+
+     <script src="https://gist.github.com/nasmnitc/a0fb0d0e1401c6c1d0a7fcf3da06bd8d.js"></script>
+
+     <li>This method is even used to output numbers. If we have a number we will break that into digits. Then we keep each of that digit in a variable of size 1 byte. Then we add 30h (ASCII of 0) to each, doing so we will get the ASCII of character to be print.</li>
+
+     </ul>
+
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</p>
+
+
+
+
+
+</div>
+   
+</div>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+}
+
+// When the user scrolls the page, execute myFunction
+window.onscroll = function() {myFunction()};
+
+// Get the header
+var header = document.getElementById("myHeader");
+
+// Get the offset position of the navbar
+var sticky = header.offsetTop;
+
+// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+} 
+</script>
+     
+</body>
+</html>

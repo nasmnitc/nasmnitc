@@ -18,7 +18,6 @@
 }
 
 .w3-main	 {
-
 	font-family: 'Tajawal', sans-serif;
 	font-size: 1.4em;
   overflow: hidden;
@@ -98,4 +97,7 @@ table, th, td {
   font-family: 'Source Code Pro', monospace;
   font-size: 0.8em;
   font-weight: lighter;
+
+
 }
+
