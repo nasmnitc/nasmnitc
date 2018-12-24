@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html>
+<title>NASM Manual NITC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Croissant+One" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Fjalla+One|Raleway|Roboto+Slab" rel="stylesheet">
+
+<body>
+
+
+<div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left" style="width:200px;" id="mySidebar">
+  <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
+  <a href="#" class="w3-bar-item w3-button nav-item">HOME</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item active"> <i class="fa fa-book"></i> Chapter 1 - Basics of Computer Organization</a>
+  <a href="chapter2.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 2 - Introduction to NASM</a>
+  <a href="#" class="w3-bar-item w3-button nav-item">Link 3</a>
+</div>
+
+<div class="w3-main" style="margin-left:200px;">
+
+<div class="w3-teal" id="myHeader">
+  <button class="w3-button w3-teal w3-xlarge w3-hide-large" onclick="w3_open()">&#9776;</button>
+  <div class="w3-container">
+    <h1 style="font-family: 'Croissant One', cursive; text-shadow: 2px 2px 4px #3d1010; color: white;">NASM Manual NITC</h1>
+  </div>
+</div>
+
+<div class="w3-container">
+  <h1 align="center">Chapter 2 - Introduction to NASM</h1>
+  <hr class="style-eight" max-width="50%" style="margin-left: 25%; margin-right: 25%">
+  <hr width="100%" align="center" style="margin-left: 100%; margin-right: 30%">  
+<p>
+
+<h3>Sections in NASM</h3>
+A NASM program is divided into three sections.
+<ol>
+ <li>section .text :<br>
+ This section contains the executable code from where execution starts.
+ It is analogous to the main() function in C.</li>
+ <li>section .bss :<br>
+ Here, variables are declared without initialisation.</li>
+ <li>section .data :<br>
+ Variables are declared and initialised in this section.
+ For declaring space in the memory the following directives are used,
+ 
+ <ul>
+  <li>RESx:<br>
+  reserve just space in memory for a variable without giving any
+  initial values.</li>
+  <li>Dx:<br>
+  declaring space in the memory for any variable and also providing
+  the initial values at that moment. Where x can be replaced with
+
+<div style="overflow-x:auto;">
+<table class="responsive" cellpadding="10" border = "1" align="center">
+<tr><th>x</th>
+    <th>Meaning</th>
+    <th>Bytes</th>
+<tr>
+<tr><td>b</td>
+    <td>BYTE</td>
+    <td>1</td>
+<tr>
+<tr><td>w</td>
+    <td>WORD</td>
+    <td>2</td>
+<tr>
+<tr><td>d</td>
+    <td>DOUBLE WORD</td>
+    <td>4</td>
+<tr>
+<tr><td>q</td>
+    <td>QUAD WORD</td>
+    <td>8</td>
+<tr>
+<tr><td>t</td>
+    <td>TEN BYTE</td>
+    <td>20</td>
+<tr>
+</table></div></li>
+</ul></li></ol>
+
+Examples:<br><br>
+section .data<br>
+var1: db 10 ;Reserve one byte in memory for storing var1 and var1=10<br>
+str1: db Hello World!<br><br>
+section .bss<br>
+var1: db resb 1<br>
+var2: db resq 1<br>
+var3 : db 1,2,3,4<br>
+string: db Hello<br>
+string2: db H,e,l,l,o<br>
+<p>Here both string and string2 are identical. They are 5 bytes long and stores
+the string Hello. Each character in the string will be first converted to ASCII
+code and that numeric value will be stored in each byte location.</p>
+
+<p style="border: 1px solid black; border-radius: 10px; padding: 15px;">
+<b>TIMES</b><br>
+It is used to create and initialize large arrays with a common
+initial value for all its elements.<br>
+Eg: var: times 100 db 1<br>
+Creates an array of 100 bytes and each element
+will be initialized with the value 1.</p>
+
+<h4>Dereferencing in NASM</h4>
+To access the data stored at an address, the dereferencing operator used is
+'[' ']'.<br>
+Examples:<br>
+mov eax, [var] <vspace>  ;Value at address location var would be copied to eax<br>
+Mov eax,var   ;Address location var is copied to eax
+
+<h4>Type casting</h4>
+<p>It is required for the operands for which the assembler cannot predict the
+number of memory locations to dereference to get the data(like INC , MOV
+etc). For other instructions (like ADD, SUB etc) it is not mandatory. The
+directives used for specifying the datatype are: BYTE, WORD, DWORD,
+QWORD, TWORD.</p>
+Eg:<br>
+MOV dword[ebx], 1 <br>
+INC BYTE[label] <br>
+ADD eax, dword[label] <br>
+
+<h3>X86 Instruction Set</h3>
+
+<ol>
+ <li>MOV Move/Copy <br>
+ Copy the content of one register/memory to another or change the value 
+ of a register/ memory variable to an immediate value. <br><br>
+ Syntax: mov dest, src 
+ <ul>
+  <li>src should be a register / memory operand.</li>
+  <li>Both src and dest cannot together be memory operands.</li>
+ </ul> <br>
+ 
+ Eg:<br>
+ mov eax, ebx ;Copy the content of ebx to eax <br>
+ mov ecx, 109 ;Changes the value of ecx to 109 <br>
+ mov al, bl <br>
+ mov byte[var1], al ;Copy the content of al register to the variable var1
+ in memory <br>
+ mov word[var2], 200 <br>
+ mov eax, dword[var3] </li><br>
+
+ <li>MOVZX Move and Extend <br>
+ Copy and extend a variable from a lower spaced memory / register
+ location to a higher one.<br><br>
+ syntax : mov src, dest <br>
+ <ul><li>size of dest should be greater than or equal to size of src.</li>
+ <li>src should be a register / memory operand.</li>
+ <li>Both src and dest cannot together be memory operands.</li>
+ <li>Works only with signed numbers.</li>
+ </ul><br>
+ Eg:<br>
+ movzx eax, ah<br>
+ movzx cx, al<br>
+
+ <ul><li>For extending signed numbers we use instructions like CBW (Con-
+ vert Byte to Word), CWD (Convert Word to Double).</li>
+ <li>CBW extends the AL registerto AX</li>
+ <li>CWD extends the AX registerto DX:AX registerpair</li></ul></li><br>
+
+ <li>ADD Addition <br><br>
+ Sytax : <br>
+ add dest, src ; dest = dest + src;<br>
+ Used to add the values of two register/ memory var and store the result
+ in the first operand.
+ <ul><li>src should be a register / memory operand.</li>
+ <li>Both src and dest cannot together be memory operands.</li>
+ <li>Both the operands should have the same size.</li></ul><br>
+ 
+ Eg:<br>
+ add eax, ecx ; eax = eax + ecx<br>
+ add al, ah ; al = al + ah<br>
+ add ax, 5<br>
+ add edx, 31h<br></li><br>
+
+ <li>SUB Subtraction<br><br>
+ Sytax : <br>sub dest, src ; dest = dest - src;<br>
+ 
+ Used to subtract the values of two register/ memory var and store the
+ result in the first operand.
+
+ <ul><li>src should be a register / memory operand.</li>
+ <li>Both src and dest cannot together be memory operands.</li>
+ <li>Both the operands should have the same size. </li></ul><br>
+
+ Eg:<br>
+ sub eax, ecx ; eax = eax - ecx <br>
+ sub al, ah ; al = al - ah<br>
+ sub ax, 5 <br>
+ sub edx, 31h </li><br>
+
+ <li>INC Increment operation<br>
+ Used to increment the value of a register/ memory variable by 1.<br><br>
+ Eg:<br>
+ INC eax ; eax++<br>
+ INC byte[var] <br>
+ INC al </li><br>
+
+ <li>DEC Decrement operation<br>
+ Used to decrement the value of a register/ memory variable by 1.<br><br>
+ Eg:<br>
+ DEC eax ; eax--<br>
+ DEC byte[var] <br>
+ DEC al </li><br>
+ 
+ <li>MUL Multiplication<br><br>
+ Syntax : mul src<br>
+ Used to multiply the value of a register/ memory variable with the
+ EAX / AX / AL reg. MUL works according to the following rules.<br>
+ <ul><li>If src is 1 byte then AX = AL * src.</li>
+ <li>If src is 1 word (2 bytes) then DX:AX = AX * src (ie. Upper 16
+ bits of the result (AX*src) will go to DX and the lower 16 bits
+ will go to AX).</li>
+ <li>If src is 2 words long(32 bit) then EDX:EAX = EAX * src (ie.
+ Upper 32 bits of the result will go to EDX and the lower 32 bits
+ will go to EAX).</li></ul></li><br>
+
+ <li>IMUL Multiplication of signed numbers<br>
+ IMUL instruction works with the multiplication of signed numbers. it
+ can be used mainly in three different forms.<br><br>
+ Syntax :<br>
+ <ol><li>imul src </li>
+ <li>imul dest, src</li>
+ <li> imul dest, src1, src2</li></ol><br>
+
+ <ul><li>If we use imul as in (1) then its working follows the same rules of MUL.</li>
+ <li>If we use that in (2) form then dest = dest * src.</li>
+ <li>If we use that in (3) form then dest = src1 * scr2.</li></ul></li><br>
+
+ <li>DIV Division<br><br>
+ Synatx : div src<br>
+ Used to divide the value of EDX:EAX or DX:AX or AX register with
+ register/ memory variable in src. DIV works according to the following
+ rules.<br>
+ <ul><li>If src is 1 byte then AX will be divide by src, remainder will go to
+ AH and quotient will go to AL.</li>
+ <li> If src is 1 word (2 bytes) then DX:AX will be divided by src,
+ remainder will go to DX and quotient will go to AX.</li>
+ <li> If src is 2 words long(32 bit) then EDX:EAX will be divide by src,
+ remainder will go to EDX and quotient will go to EAX.</li></ul></li><br>
+
+ <li>NEG Negation of Signed numbers.<br><br>
+ Sytax : NEG op1<br>
+ NEG Instruction negates a given register/ memory variable.</li><br>
+
+ <li>CLC - Clear Carry <br>
+ This instruction clears the carry flag bit in CPU FLAGS.</li><br>
+
+ <li>ADC Add with Carry<br><br>
+ Syntax : ADC dest, src<br>
+ ADC is used for the addition of large numbers. Suppose we want to
+ add two 64 bit numbers. We keep the first number in EDX:EAX (ie.
+ most significant 32 bits in EDX and the others in EAX) and the second
+ number in EBX:ECX.<br><br>
+ Then we perform addition as follows<br>
+ Eg:<br>
+ clc ; Clearing the carry FLAG<br>
+ add eax, ecx ; Normal addition of eax with ecx<br>
+ adc edx, ebx ; Adding with carry for the higher bits.</li><br>
+
+ <li>SBB Subtract with Borrow<br><br>
+ Syntax : SBB dest, src<br>
+ SBB is analogous to ADC and it is used for the subtraction of large
+ numbers. Suppose we want to subtract two 64 bit numbers. We keep
+ the first numbers in EDX:EAX and the second number in EBX:ECX.<br><br>
+ Then we perform subtraction as follows<br>
+ Eg:<br>
+ clc ; Clearing the carry FLAG<br>
+ sub eax, ecx ; Normal subtraction of ecx from eax<br>
+ sbb edx, ebx ; Subtracting with carry for the higher bits.</li><br>
+
+ <h4>Branching In NASM</h4>
+
+ <li>JMP Unconditionally Jump to label<br>
+ JMP is similar to the goto label statements in C / C++. It is used to
+ jump control to any part of our program without checking any conditions.</li><br>
+
+ <li>CMP Compares the Operands<br><br>
+ Syntax :CMP op1, op2<br>
+ When we apply CMP instruction over two operands say op1 and op2
+ it will perform the operation op1 - op2 and will not store the result.
+ Instead it will affect the CPU FLAGS. It is similar to the SUB operation, 
+ without saving the result. For example if op1 6 = op2 then the Zero
+ Flag(ZF) will be set to 1.<br>
+ NB: For generating conditional jumps in NASM we will first perform
+ the CMP operation between two register/ memory operands and then
+ we use the following jump operations which checks the CPU FLAGS.<br><br>
+ Conditional Jump Instructions:<br>
+ 
+ <div style="overflow-x:auto;">
+ <table class="responsive" border = "1" align="center" bordercolor = "maroon">
+<tr><th>Instruction</th>
+    <th>Working</th>
+</tr>
+<tr><td>JZ</td>
+    <td>Jump If Zero Flag is Set</td>
+</tr>
+<tr><td>JNZ</td>
+    <td>Jump If Zero Flag is Unset</td>
+</tr>
+<tr><td>JC</td>
+    <td>Jump If Carry Flag is Set</td>
+</tr>
+<tr><td>JNC</td>
+    <td>Jump If Carry Flag is UnSet</td>
+</tr>
+<tr><td>JP</td>
+    <td>Jump If Parity Flag is Set</td>
+<tr>
+<tr><td>JNP</td>
+    <td>Jump If Parity Flag is UnSet</td>
+</tr>
+<tr><td>JO</td>
+    <td>Jump If Overflow Flag is Set</td>
+<tr>
+<tr><td>JNO</td>
+    <td>Jump If Overflow Flag is UnSet</td>
+</tr>
+
+</table></div><br>
+
+ Advanced Conditional Jump Instructions:
+ <p>In 80x86 processors Intel has added some enhanced versions of the
+ conditional operations which are much more easier to use compared to
+ traditional Jump instructions. They are easy to perform comparison
+ between two variables.</p>
+ First we need to use CMP op1, op2 before even using these set of Jump
+ instructions. There is separate class for comparing the signed and un-
+ signed numbers.<br><br>
+ <ol><li>For Unsigned numbers:<br>
+ 
+ <div style="overflow-x:auto;">
+ <table class="responsive" cellpadding="10" border = "1" align="center" bordercolor = "maroon">
+ <tr><th>Instruction</th>
+    <th>Working</th>
+ </tr>
+ <tr><td>JE</td>
+    <td>Jump if op1 = op2</td>
+ </tr>
+ <tr><td>JNE</td>
+    <td>Jump if op1 &ne; op2</td>
+ </tr>
+ <tr><td>JA (jump if above)</td>
+    <td>Jump if op1 > op2</td>
+ </tr>
+ <tr><td>JNA</td>
+    <td>Jump if op1 &le; op2</td>
+ </tr>
+ <tr><td>JB (jump if below)</td>
+    <td>Jump if op1 < op2</td>
+ </tr>
+ <tr><td>JNB</td>
+    <td>Jump if op1 &ge; op2</td>
+ </tr>
+ </table></div></li><br>
+
+ <li>For Signed numbers:<br>
+ <div style="overflow-x:auto;">
+ <table class="responsive" cellpadding="10" border = "1" align="center" bordercolor = "maroon">
+ <tr><th>Instruction</th>
+    <th>Working</th>
+ </tr>
+ <tr><td>JE</td>
+    <td>Jump if op1 = op2</td>
+ </tr>
+ <tr><td>JNE</td>
+    <td>Jump if op1 &ne; op2</td>
+ </tr>
+ <tr><td>JG (jump if above)</td>
+    <td>Jump if op1 > op2</td>
+ </tr>
+ <tr><td>JNG</td>
+    <td>Jump if op1 &le; op2</td>
+ </tr>
+ <tr><td>JL (jump if below)</td>
+    <td>Jump if op1 < op2</td>
+ </tr>
+ <tr><td>JNL</td>
+    <td>Jump if op1 &ge; op2</td>
+ </tr>
+ </table></div></li></ol></li><br>
+
+ <li>LOOP instruction<br><br>
+ Syntax: loop label<br>
+ When we use Loop instruction ecx register acts as the loop variable.
+ Loop instruction first decrements the value of ecx and then check if
+ the new value of ecx 6 = 0. If so it will jump to the label following that
+ instruction. Else control jumps to the very next statement.<br><br>
+ Converting Standard C/C++ Control Structures to NASM:
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+
+ <h4>Boolean Operators</h4>
+
+ <li>AND (Bitwise Logical AND)<br><br>
+ Syntax : AND op1, op1<br>
+ Performs bitwise logical AND operation of op1 and op2 , assign the
+ result to op1.<br>
+ op1 = op1 & op2; //Equivalent C Statement <br>
+ Let x = 10101001b and y = 10110010b be two 8-bit binary numbers.
+ Then x & y
+
+ <div style="overflow-x:auto;">
+ <table class="responsive" cellpadding="10" border = "1" align="center" bordercolor = "maroon">
+ <tr><th>x</th>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>0</td>
+     <td>1</td>
+ </tr>
+ <tr><th>y</th>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>1</td>
+     <td>0</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+ </tr>
+ <tr><th>x AND y</th>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>0</td>
+     <td>0</td>
+     <td>0</td>
+     <td>0</td>
+ </tr>
+ </table></div></li><br>
+
+ <li>OR (Bitwise Logical OR)<br><br>
+ Syntax: OR op1, op1<br>
+ Performs bitwise logical OR operation of op1 and op2 , assign the result
+ to op1.<br>
+ op1 = op1 || op2;//Equivalent C Statement <br> 
+ Let x = 10101001b and y = 10110010b be two 8-bit binary numbers.
+ Then x || y
+ 
+ <div style="overflow-x:auto;">
+ <table class="responsive" cellpadding="10" border = "1" align="center" bordercolor = "maroon">
+ <tr><th>x</th>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>0</td>
+     <td>1</td>
+ </tr>
+ <tr><th>y</th>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>1</td>
+     <td>0</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+ </tr>
+ <tr><th>x OR y</th>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>1</td>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>1</td>
+ </tr>
+ </table></div></li><br>
+
+ <li>XOR (Bitwise Logical Exclusive OR)<br><br>
+ Syntax: XOR op1, op1<br>
+ Performs bitwise logical XOR operation of op1 and op2 , assign the
+ result to op1.<br>
+ op1 = op1 &oplus; op2; //Equivalent C Statement<br> 
+ Let x = 10101001b and y = 10110010b be two 8-bit binary numbers.
+ Then x &oplus; y
+
+ <div style="overflow-x:auto;">
+ <table class="responsive" cellpadding="10" border = "1" align="center" bordercolor = "maroon">
+ <tr><th>x</th>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>0</td>
+     <td>1</td>
+ </tr>
+ <tr><th>y</th>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>1</td>
+     <td>0</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+ </tr>
+ <tr><th>x XOR y</th>
+     <td>0</td>
+     <td>0</td>
+     <td>0</td>
+     <td>1</td>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>1</td>
+ </tr>
+ </table></div></li><br>
+
+ <li>NOT (Bitwise Logical Negation)<br><br>
+ Syntax: NOT op1<br>
+ Performs bitwise logical NOT of op1 and assign the result to op1.<br>
+ op1 = &sim; op1; //Equivalent C Statement
+
+ <div style="overflow-x:auto;">
+ <table class="responsive" cellpadding="10" border = "1" align="center" bordercolor = "maroon">
+ <tr><th>x</th>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>0</td>
+     <td>1</td>
+ </tr>
+ <tr><th>NOT x</th>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>1</td>
+     <td>0</td>
+ </tr>
+ </table></div></li><br>
+
+ <li>TEST (Logical AND, affects only CPU FLAGS)<br><br>
+ Syntax: TEST op1, op2<br>
+ <ul><li>It performs the bitwise logical AND of op1 and op2 but it wont
+ save the result to any registers. Instead the result of the operation
+ will affect CPU FLAGs.</li>
+ <li>It is similar to the CMP instruction in usage.</li></ul></li><br>
+ 
+ <li>SHL Shift Left<br><br>
+ Syntax : SHL op1, op2<br>
+ op1 = op1 << op2; //Equivalent C Statement<br>
+ <ul><li>SHL performs the bitwise left shift. op1 should be a register /
+ memory variable but op2 must be an immediate(constant) value.</li>
+ <li>It will shift the bits of op1, op2 number of times towards the left
+ and put the rightmost op2 number of bits to 0.</li></ul><br>
+
+ Example:<br>
+ shl al, 3
+
+ <div style="overflow-x:auto;">
+ <table class="responsive" cellpadding="10" border = "1" align="center" bordercolor = "maroon">
+ <tr><th>al</th>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>0</td>
+     <td>1</td>
+ </tr>
+ <tr><th>al << 3</th>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>0</td>
+     <td>0</td>
+ </tr>
+ </table></div></li><br>
+
+ <li>SHR Shift Right<br><br>
+ Syntax : SHR op1, op2<br>
+ op1 = op1 >> op2; //Equivalent C Statement<br>
+ <ul><li>SHR performs the bitwise right shift. op1 should be a register/
+ memory variable but op2 must be an immediate(constant) value.</li>
+ <li>It will shift the bits of op1, op2 number of times towards the right
+ and put the leftmost op2 number of bits to 0.</li></ul>
+ Example:<br>
+ shr al, 3
+
+ <div style="overflow-x:auto;">
+ <table class="responsive" cellpadding="10" border = "1" align="center" bordercolor = "maroon">
+ <tr><th>al</th>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>0</td>
+     <td>1</td>
+ </tr>
+ <tr><th>al >> 3</th>
+     <td>0</td>
+     <td>0</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+ </tr>
+ </table></div></li><br>
+
+ <li>ROL Rotate Left<br><br>
+ Syntax : ROL op1, op2<br>
+ ROL performs the bitwise cyclic left shift. op1 could be a register/
+ memory variable but op2 must be an immediate(constant) value.<br>
+ Example :<br> rol al, 3
+
+ <div style="overflow-x:auto;">
+ <table class="responsive" cellpadding="10" border = "1" align="center" bordercolor = "maroon">
+ <tr><th>al</th>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>0</td>
+     <td>1</td>
+ </tr>
+ <tr><th>rol al, 3</th>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>0</td>
+     <td>1</td>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+ </tr>
+ </table></div></li><br>
+
+ <li>ROR Rotate Right<br><br>
+ Syntax : ROR op1, op2<br>
+ ROR performs the bitwise cyclic right shift. op1 could be a register/
+ memory variable but op2 must be an immediate(constant) value.<br>
+ Example: <br>ror eax, 5
+ <div style="overflow-x:auto;">
+ <table class="responsive" cellpadding="10" border = "1" align="center" bordercolor = "maroon">
+ <tr><th>al</th>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>0</td>
+     <td>1</td>
+ </tr>
+ <tr><th>ror al, 3</th>
+     <td>0</td>
+     <td>0</td>
+     <td>1</td>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+     <td>0</td>
+     <td>1</td>
+ </tr>
+ </table></div></li><br>
+
+ <li>RCL Rotate Left with Carry<br><br>
+ Syntax : RCL op1, op2<br>
+ Its working is same as that of rotate left except it will consider the
+ carry bit as its left most extra bit and then perform the left rotation.</li><br>
+
+ <li>RCR Rotate Right with Carry<br><br>
+ Syntax : RCR op1, op2<br>
+ Its working is same as that of rotate right except it will consider the
+ carry bit as its left most extra bit and then perform the right rotation.</li><br>
+
+ <h4>Stack Operations</h4>
+
+ <li>PUSH<br><br>
+ Syntax: PUSH register/constant<br>
+ Pushes a value into system stack. It decreases the value of ESP and
+ copies the value of a register / constant into the system stack.<br>
+
+ Examples<br>
+ PUSH ax ; ESP = ESP - 2 and copies value of ax to [EBP]<br>
+ PUSH eax ; ESP = ESP - 4 and copies value of ax to [EBP]<br>
+ PUSH ebx<br>
+ PUSH dword 5<br>
+ PUSH word 258</li><br>
+
+ <li>POP<br><br>
+ Pops off a value from the system stack.POP Instruction takes the value
+ stored in the top of system stack to a register and then increases the
+ value of ESP.<br>
+ Examples:<br>
+ POP bx ; ESP= ESP + 2<br>
+ POP ebx ; ESP= ESP + 4<br>
+ POP eax</li><br>
+
+ <li>PUSHA<br>
+ Pushes the value of all general purpose registers. PUSHA is used to
+ save the value of general purpose registers especially when calling some
+ subprograms which will modify their values.</li><br>
+
+ <li>POPA<br>
+ Pops off the value of all general purpose registers which we have pushed
+ before using PUSHA instruction.</li><br>
+
+ <li>PUSHF<br>
+ Pushes all the CPU FLAGS.</li><br>
+
+ <li>POPF<br>
+ POP off and restore the values of all CPU Flags which have been pushed
+ before using PUSHF instructions.</li><br>
+
+ <hr>
+ <p>NB: It is important to pop off the values pushed into the stack properly.
+ Even a minute mistake in any of the PUSH / POP instruction could
+ make the program not working.</p><hr>
+
+ <li>Pre-processor Directives in NASM<br><br> In NASM %define acts similar to the
+ C's preprocessor directive define. This can be used to declare constants.<br>
+ Eg:<br>
+ %define SIZE 100</li><br></ol>
+
+<h3>Comments in NASM</h3>
+
+ Only single line comments are available in NASM. A semicolon (;) is inserted
+ in front of the line to be commented.<br>
+ Ex: ; A program to find the largest of 2 numbers<br>
+
+<h3>NASM Installation</h3>
+ <p>NASM is freely available on internet. You can visit www.nasm.us . It's
+ documentation is also available there. In order to install NASM in windows
+ you can download it as an installation package from the site and install it
+ easily.</p>
+ In Ubuntu Linux you can give the command :<br>
+ sudo apt-get install nasm<br><br>
+ and in fedora you can use the command:<br>
+ su -c 'yum install nasm'<br><br>
+ in a terminal and easily install nasm.<br>
+
+<h3>Compilation</h3>
+ <ol><li>Assembling the source file<br><br>
+nasm -f elf filename.asm<br><br>
+This creates an object file, filename.o in the current working directory.</li>
+ <li>Creating an executable file<br><br>
+For a 32 bit machine<br>
+ld filename.o -o output filename<br><br>
+For 64 bit machine<br>
+ld -melf i386 filename -o output filename<br><br>
+This creates an executable file of the name output filename.</li>
+ <li>Program execution<br><br>
+./output filename<br><br>
+For example, if the program to be run is first.asm<br><br>
+nasm -f elf first.asm<br>
+ld first.o -o output<br>
+./output</li></ol>
+
+
