@@ -1,10 +1,10 @@
 .w3-teal {
-	background-color: #c43235 !important;
+  background-color: #1b998b !important;
 }
 
 #mySidebar {
-		background-color: #252839 !important;
-		color: white;
+    background-color: #032632 !important;
+    color: white;
 }
 
 .w3-button {
@@ -12,14 +12,14 @@
 }
 
 .active, .w3-button:hover {
-  background-color: #369693  !important;
+  background-color: #056075  !important;
   color: white  !important;
-  border-left: 6px solid #c43235 !important;
+  border-left: 6px solid #177e72 !important;
 }
 
-.w3-main	 {
-	font-family: 'Tajawal', sans-serif;
-	font-size: 1.4em;
+.w3-main   {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1.4em;
   overflow: hidden;
 }
 
@@ -31,22 +31,22 @@ h1, h2, h3{
 }
 
 .w3-sidebar {
-	font-family: 'Raleway', sans-serif;
-	font-size: 1.1	em;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1.1em;
 
 }
 
 hr.style-eight {
 height: 7px;
 border: 1;
-box-shadow: inset 0 9px 9px -3px #369693;
+box-shadow: inset 0 9px 9px -3px #056075;
 -webkit-border-radius: 5px;
 -moz-border-radius: 5px;
 -ms-border-radius: 5px;
 -o-border-radius: 5px;
 border-radius: 5px;
 
-}	
+} 
 
 
 /* Page content */
@@ -73,6 +73,7 @@ border-radius: 5px;
   margin-left: auto;
   margin-right: auto;
   border-collapse: collapse;
+  width: 100%;
   border: 1px solid #ddd;
   text-align: center;
 }
@@ -82,6 +83,20 @@ border-radius: 5px;
   width: 40% !important;
 
 }  
+}
+
+@media (max-width: 1025px){
+#headerText {
+  font-size: 1.3em !important; 
+  padding: 0px !important;
+}
+}
+
+
+#headerText {
+  font-size: 2em;
+  font-family: 'Cinzel', serif; color: white;
+  padding: 10px;
 }
 
 table, th, td {
@@ -97,7 +112,4 @@ table, th, td {
   font-family: 'Source Code Pro', monospace;
   font-size: 0.8em;
   font-weight: lighter;
-
-
 }
-
