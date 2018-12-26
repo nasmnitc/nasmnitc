@@ -14,8 +14,8 @@
 
 <div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left" style="width:200px;" id="mySidebar">
   <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
-  <a href="index.html" class="w3-bar-item w3-button nav-item active">HOME</a>
-  <a href="chapters/chapter1.html" class="w3-bar-item w3-button nav-item "> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="#" class="w3-bar-item w3-button nav-item">HOME</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item active"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
   <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
   <a href="chapters/chapter3.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 3 - Basic I/O in NASM</a>
   <a href="chapters/chapter4.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
@@ -41,7 +41,27 @@
   <hr width="100%" align="center" style="margin-left: 100%; margin-right: 30%">  
 <p>
 
-s are written in assembly language. In
+<h3>Machine Language</h3>
+
+Machine language consists of instructions in the form of 0s and 1s. Every CPU
+has its own machine language. It is very difficult to write programs using the
+combination of 0s and 1s. So we rely upon either assembly language or high level
+language for writing programs.
+
+<h3>Assembly Language</h3>
+
+An assembly language is a low-level programming language for microprocessors
+and other programmable devices.Assembly language uses a mnemonic to represent
+each low-level machine instruction.
+
+<h3>Why Assembly Language ?</h3>
+
+The symbolic programming of Assembly Language is easier to understand and
+saves a lot of time and effort of the programmer. When you study assembly lan-
+guage, you will get a better idea of computer organization and how a program
+executes in a computer. A program written in assembly language will be more
+efficient than the same program written in a high level language. Some portions
+of Linux kernel and some system softwares are written in assembly language. In
 programming languages like C, C++ we can even embed assembly language instructions into it using functions like asm( ); (Refer to Chapter 8 of The Intel
 Microprocessors by Barry B. Brey for more details)
 
@@ -92,7 +112,29 @@ Stored Program Computers These can be programmed to carry 36 out many dif-
 ferent tasks, applications are stored on them, hence the name.
 <hr style="border-color: black;">
 
-<h3>Proc
+<h3>Processor</h3>
+
+Processor is the brain of the computer. It performs all mathematical, logical and
+control operations of a computer. It is that component of the computer which
+executes all the instructions given to it in the form of programs. It interacts with
+I/O devices, memory (RAM) and secondary storage devices and thus implements
+the instructions given by the user.
+<br><br>
+The term processor is used interchangeably with the term central processing unit
+(CPU), although strictly speaking, the CPU is not the only processor in a com-
+puter.
+<br>
+
+<img class="responsive" src="images/processor.jpeg">
+<p align="center">Intel Core i9</p>
+
+<h3>Registers</h3>
+Registers are the most immediately accessible memory units for the processor.
+They are the fastest among all the types of memory. They reside inside the processor and the processor can access the contents of any register in a single clock
+cycle. It is the working memory for a processor, i.e , if we want the processor to
+perform any task it needs the data to be present in any of its registers.
+
+
 <div style="border: 1px solid black; border-radius: 10px; padding: 15px;">
 <p style="font-weight: bold;" align="center">What is a clock cycle? </p><br>
 In computers, the clock cycle is the amount of time between two pulses of
