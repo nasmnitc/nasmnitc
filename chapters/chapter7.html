@@ -139,6 +139,90 @@ Strings are stored in memory as array of characters. Each character in English a
 <br>
 Now let's get started to work with strings.
 
+<ol>
+  <li>
+    <span style="font-weight: bold;">Declaring/ Initializing a string</span>
+  </li>
+  <script src="https://gist.github.com/Lakshmi-Alwin/876526977eb889d8a2a26addeedda068.js"></script>
+
+  <li>
+   <span style="font-weight: bold;">Reading a string</span><br>
+   <span style="font-weight: bold;">Psuedo Code</span>
+    <span class="code"><pre>
+     i=0
+     while(num!='\n')
+         read(num)
+         (arr+i)=num
+         i++
+     endwhile
+    </pre></span>
+    <span style="font-weight: bold;">NASM Code</span>
+    <script src="https://gist.github.com/Lakshmi-Alwin/1208e236406778c5491cb689fa7b195c.js"></script>
+   </li>
+   <li><span style="font-weight: bold;">Printing a string</span><br>
+   <span style="font-weight: bold;">Psuedo Code</span>
+    <span class="code"><pre>
+     while(*(arr+i)!=’\n’)
+	print(arr+i)
+	i++
+     endwhile
+    </pre></span>
+    <span style="font-weight: bold;">NASM Code</span>
+    <script src="https://gist.github.com/Lakshmi-Alwin/553b009c19584bf7a295fc9f4769c1ba.js"></script>
+    </li>
+    <li><span style="font-weight: bold;">Sample Program - To count the number of each vowels in a string :</span><br>
+    <script src="https://gist.github.com/Lakshmi-Alwin/d0d4936b812fb6c83f88776a753862c6.js"></script>
+    </li></ol>
+
+  <h3>Two-Dimensional Array / Matrices</h3>
+  <p>Memory / RAM is a continuous storage unit in which we cannot directly store any
+  2-D Arrays/Matrices/Tables. 2-D Arrays are implemented in any programming
+  language either in row major form or column major form.</p>   
+  In row major form we first store 1st row, then the 2nd, and so on. In column
+  major form we store the 1st column, then the 2nd, and so on till the last element
+  of last column. For example if we have a 2 x 3 matrix say A of elements 1 byte
+  each. Let the starting address of the array be 12340. Then the array will be stored
+  in memory as:<br>
+  <ol><li>Row Major Form<br>
+  <center>Address Element<br>
+  12340 A[0][0]<br>
+  12341 A[0][1]<br>
+  12342 A[0][2]<br>
+  12343 A[1][0]<br>
+  12344 A[1][1]<br></center></li>
+  <li>Column Major Form<br>
+  <center>Address Element<br>
+  12340 A[0][0]<br>
+  12341 A[1][0]<br>
+  12342 A[0][1]<br>
+  12343 A[1][1]<br>
+  12344 A[0][2]<br>
+  12345 A[1][2]<br></center>Using this concept we can implement the 2-D array in NASM Programs.<br></li></ol>
+  <ol><li>Declaration/ Initialization<br>
+  <script src="https://gist.github.com/Lakshmi-Alwin/3e9370f951e016d129c0dba9dd6becda.js"></script>
+  </li>
+  <li><span style="font-weight: bold;">Read elements into a matrix</span>
+      <span style="font-weight: bold;">Psuedo Code</span>
+     <span class="code"><pre>
+     read(m)
+     read(n)
+     i=0
+     k=0
+     while(i &lt; m)
+	j=0
+	while(j &lt; n)
+           read(num)
+	   *(matrix + k)=num
+ 	   ++j
+	   ++k
+	endwhile
+	++i
+      endwhile
+    </pre></span>
+  <span style="font-weight: bold;">NASM Code</span>
+  
+
+
 
 </p>
 </div>
