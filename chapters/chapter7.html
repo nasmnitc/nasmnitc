@@ -220,7 +220,71 @@ Now let's get started to work with strings.
       endwhile
     </pre></span>
   <span style="font-weight: bold;">NASM Code</span>
-  
+  <script src="https://gist.github.com/Lakshmi-Alwin/ee5a25defe848cf82708c0c6d58de66b.js"></script></li>
+
+  <li><span style="font-weight: bold;">Read and print the elements of a matrix</span>
+      <span style="font-weight: bold;">Psuedo Code</span>
+     <span class="code"><pre>
+     read(m)
+     read(n)
+     i=0
+     k=0
+     while(i &lt; m)
+	j=0
+	while(j &lt; n)
+           read(num)
+	   *(matrix + k)=num
+ 	   ++j
+	   ++k
+	endwhile
+	++i
+      endwhile
+
+      i=0
+      k=0
+      while(i &lt; m)
+	j=0
+	while(j &lt; n)
+	   num=*(matrix+k)
+	   print(num)
+	   ++j
+	   ++k
+	endwhile
+	++i
+      endwhile
+    </pre></span>
+  <span style="font-weight: bold;">NASM Code</span>
+  <script src="https://gist.github.com/Lakshmi-Alwin/e3e79375ddd27a13d5321b5db21c24f0.js"></script>
+  </li></ol>
+
+ <h3>Array / String Operations</h3>
+ <p>x86 Processors have a set of instructions designed specially to do array / string op-
+erations much easily compared with the traditional methods demonstrated above.
+They are called String Instructions. Even though it is termed as string instructions,
+it work well with general array manipulations as well. They use index registers(ESI
+& EDI ) and increments / decrements either one or both the registers after each
+operation. Depending on the value of Direction Flag(DF) it either increments or
+decrements the index register’s value. </p>The following instructions are used to set
+the value of DF manually:
+<ol><li>CLD - Clears the Direction Flag. Then the string instruction will increment
+the values of index registers.</li>
+<li>STD - Sets the Direction Flag to 1. Then the string instructions will decrement
+the values of index registers.</li></ol>
+NB: Always make sure to set the value of Direction Flags explicitly, else it may
+lead to unexpected errors.
+<p>For string operations we must make sure to have DS to be the segment base of
+Source string and ES to be the segment base of Destination String. As we are
+using the protected mode we need not set them manually. But in real mode we
+have to set the register values to the base address of the suitable segments properly.</p>
+
+<ol><li>Reading an array element to reg(AL/AX/EAX):<br>
+<span style="font-weight: bold;">LODSx</span> : x = B / W / D - Load String Instruction<br>
+This instruction is used to copy one element from an array to the register.
+It can transfer an element of size 1 Byte / 1 Word / 4 Bytes at a time.
+
+
+
+
 
 
 
