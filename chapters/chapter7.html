@@ -280,12 +280,94 @@ have to set the register values to the base address of the suitable segments pro
 <ol><li>Reading an array element to reg(AL/AX/EAX):<br>
 <span style="font-weight: bold;">LODSx</span> : x = B / W / D - Load String Instruction<br>
 This instruction is used to copy one element from an array to the register.
-It can transfer an element of size 1 Byte / 1 Word / 4 Bytes at a time.
+It can transfer an element of size 1 Byte / 1 Word / 4 Bytes at a time.<br><br>
+<span style="font-weight: bold;">LODSB<br>
+AL = byte[DS:ESI]<br>
+ESI = ESI + 1<br><br>
+LODSW<br>
+AX = word[DS:ESI]<br>
+ESI = ESI + 2<br><br>
+LODSD<br>
+EAX= dword[DS:ESI]<br>
+ESI = ESI + 4</span><br></li><br>
 
+<li>Storing a reg(AL/AX/EAX) to an array:<br>
+<span style="font-weight: bold;">STOSx</span> : x = B / W / D - Load String Instruction<br>
+This instruction is used to copy one element from a register to
+an array. It can transfer an element of size 1 Byte / 1 Word /
+4 Bytes at a time.<br><br>
+<span style="font-weight: bold;">STOSB<br>
+byte[ES:EDI] = AL EDI = EDI + 1<br><br>
+STOSW<br>
+word[ES:EDI] = AX<br>
+EDI = EDI + 2<br><br>
+STOSD<br>
+dword[ES:EDI] = EAX<br>
+EDI = EDI + 4</span><br>
+<p>NB: ESI - Source Index reg is used when the array acts as a source ie. A
+value is copied from that EDI - Destination Index reg is used when the array
+acts as a destination ie. A value is copied to that.</p>
+Eg: Program to increment the value of all array elements by 1<br>
+<script src="https://gist.github.com/Lakshmi-Alwin/b6ba5641ccaa817d3016050356e237a9.js"></script></li><br>
 
+<li>Memory Move Instructions:<br>
+These instructions are used to copy the elements of one array/string to an-
+other.<br>
+<span style="font-weight: bold;">MOVSx</span> : x = B / W / D - Move String Instruction<br><br>
+<span style="font-weight: bold;">MOVSB<br>
+byte[ES:EDI] = byte[DS:ESI]<br>
+ESI = ESI + 1<br>
+EDI = EDI + 1<br><br>
+MOVSW<br>
+word[ES:EDI] = word[DS:ESI]<br>
+ESI = ESI + 2<br>
+EDI = EDI + 2<br><br>
+MOVSD<br>
+dword[ES:EDI] = dword[DS:ESI]<br>
+ESI = ESI + 4<br>
+EDI = EDI + 4</span><br><br>
+Eg: Program to copy elements of an array to another<br>
+<script src="https://gist.github.com/Lakshmi-Alwin/6891ca43843ad2a7c9d2b785b5428c8c.js"></script></li><br>
 
+<li>REP - Repeat String Instruction<br>
+<span style="font-weight: bold;">REP</span> 'string-instruction'<br>
+ <p>
+Repeats a string instruction. The number of times repeated is equal to the
+value of ecx register(just like loop instruction)</p>
+Eg: Previous program can also be written as follows using REP instruc-
+tion:<br>
+<script src="https://gist.github.com/Lakshmi-Alwin/0406c99c27b448086c4eb4d9dbb5183e.js"></script></li><br>
 
+<li>Compare Instructions<br>
+<span style="font-weight: bold;">CMPSx</span> : x = B / W / D <br> Compares two array elements and affects the
+CPU Flags just like CMP instruction.<br><br>
+<span style="font-weight: bold;">CMPSB<br>
+Compares byte[DS:ESI] with byte[ES:EDI]<br>
+ESI = ESI + 1<br>
+EDI = EDI + 1<br><br>
+CMPSW<br>
+Compares word[DS:ESI] with word[ES:EDI]<br>
+ESI = ESI + 2<br>
+EDI = EDI + 2<br><br>
+CMPSD<br>
+Compares dword[DS:ESI] with dword[ES:EDI]<br>
+ESI = ESI + 4<br>
+EDI = EDI + 4</span><br><br></li>
 
+<li>Scan Instructions<br>
+<span style="font-weight: bold;">SCASx</span> : x = B / W / D - Compares a register(AL/AX/EAX) with an array
+element and affects the CPU Flags just like CMP instruction.<br><br>
+<span style="font-weight: bold;">SCASB<br>
+Compares value of AL with byte[ES:EDI]<br>
+EDI = EDI + 1<br><br>
+SCASW<br>
+Compares value of AX with word[ES:EDI]<br>
+EDI = EDI + 2<br><br>
+SCASD<br>
+Compares value of EAX with dword[ES:EDI]<br>
+EDI = EDI + 4</span><br><br>
+Eg: Scanning an array for an element<br>
+<script src="https://gist.github.com/Lakshmi-Alwin/2ebfac2a73299ec8541799f9940f9ee7.js"></script></li></ol>
 
 
 </p>
