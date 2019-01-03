@@ -63,7 +63,7 @@ A NASM program is divided into three sections.
   the initial values at that moment. Where x can be replaced with
 
 <div style="overflow-x:auto;">
-<table class="responsive" cellpadding="10" border = "1" align="center">
+<table cellpadding="10" border = "1" align="center">
 <tr><th>x</th>
     <th>Meaning</th>
     <th>Bytes</th>
@@ -822,12 +822,12 @@ nasm -f elf filename.asm<br><br>
 This creates an object file, filename.o in the current working directory.</li>
  <li>Creating an executable file<br><br>
 For a 32 bit machine<br>
-ld filename.o -o output filename<br><br>
+ld filename.o -o output_filename<br><br>
 For 64 bit machine<br>
-ld -melf i386 filename -o output filename<br><br>
+ld -melf_i386 filename.o -o output_filename<br><br>
 This creates an executable file of the name output filename.</li>
  <li>Program execution<br><br>
-./output filename<br><br>
+./output_filename<br><br>
 For example, if the program to be run is first.asm<br><br>
 nasm -f elf first.asm<br>
 ld first.o -o output<br>

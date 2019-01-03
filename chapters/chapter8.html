@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<title>NASM Manual NITC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Croissant+One" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Fjalla+One|Raleway|Roboto+Slab" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Tajawal:300" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet"> 
+
+<body>
+
+
+<div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left" style="width:200px;" id="mySidebar">
+  <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
+  <a href="#" class="w3-bar-item w3-button nav-item">HOME</a>
+  <a href="../index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="chapters/chapter3.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 3 - Basic I/O in NASM</a>
+  <a href="chapters/chapter4.html" class="w3-bar-item w3-button nav-item "> <i class="fa fa-book"></i> Chapter 4 - Introduction to Programming in NASM</a>
+  <a href="chapters/chapter5.html" class="w3-bar-item w3-button nav-item "> <i class="fa fa-book"></i> Chapter 5 - Integer Handling</a>
+  <a href="chapters/chapter6.html" class="w3-bar-item w3-button nav-item "> <i class="fa fa-book"></i> Chapter 6 - Subprograms</a>
+  <a href="chapters/chapter7.html" class="w3-bar-item w3-button nav-item active"> <i class="fa fa-book"></i> Chapter 7 - Arrays and Strings</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+
+</div>
+
+<div class="w3-main" style="margin-left:200px;">
+
+<div class="w3-teal">
+  <button class="w3-button w3-teal w3-xlarge w3-hide-large" onclick="w3_open()">&#9776;</button>
+  <div class="w3-container">
+    <h1 style="font-family: 'Croissant One', cursive; text-shadow: 2px 2px 4px #3d1010; color: white;">NASM Manual NITC</h1>
+  </div>
+</div>
+
+<div class="w3-container">
+  <h1 align="center">Chapter 8 - Floating Point Operations</h1>
+  <hr class="style-eight" max-width="50%" style="margin-left: 35%; margin-right: 35%">
+
+<p>As in the case of characters, floating point numbers also cannot be
+represented in memory easily. We need to have some conversion to have a
+unique numeric representation for all floating point numbers. For that we
+use the standard introduced by IEEE(Institute of Electrical and Electronics
+Engineers) called IEEE-754 Standard. In IEEE-754 standard a floating point
+number can be represented either in Single Precision(4 Bytes) or Double
+Precision(8 Bytes). There is also another representation called Extended
+Precision which uses 10 Bytes to represent a number. If we convert a double
+precision floating point number to a single precision number, the result won't
+go wrong but it will be less precise.</p>
+
+IEEE-754 Standard can be summarized as follows. <br>
+
+<div style="overflow-x:auto;">
+<table cellpadding="10" border = "1" align="center">
+<tr><th>Single Precision</th>
+    <td>1 bit</td>
+    <td>8 bits</td>
+    <td>32 bits</td>
+</tr>
+<tr><th>Double Precision</th>
+    <td>1 bit</td>
+    <td>11 bits</td>
+    <td>52 bits</td>
+</tr>
+<tr><td></td>
+    <th>S</th>
+    <th>Exponent</th>
+    <th>Fraction</th>
+</tr>
+</table></div>
+S - Sign Bit.<br>
+ If the number is -ve then S = 1 else S = 0.<br>
+The number, f = (-1)Sx * (1 + 0.Fraction) * 2Exponent - Bias<br>
+1.0 &le; |Significand| &lt; 2.0<br>
+Bias : 127 for Single Precision and 1203 for Double Precision
+
+<h3>Floating Point Hardware:</h3>
+<p>In the early intel microprocessors there were no built in floating point instructions.
+ If we had to do some floating point operations then we had to do
+ that using some software emulators(which will be about 100 times slower
+than direct hardware) or adding an extra chip to the PC’s mother board
+called math coprocessor or floating point coprocessor. For 8086 and 8088
+the math coprocessor was 8087. For 80286 it was 80287 and for 80386 it
+was 80387. From 80486DX onwards intel started integrating the math co-
+processor into the main processor. But still it exists like a separate unit
+inside the main processor with a separate set of instructions, separate stack
+and status flags. There hardware for floating point operations are made for
+even doing operations in extended precision. But if we are using single /
+double precision numbers from memory it will be automatically converted
+while storing or loading. There are eight floating point coprocessor registers
+called ST0, ST1, ST2....ST7. They are organized in the form of a stack with
+ST0 in the top. When we push or load a value to the stack, value of each
+registers is pushed downward by one register. Using these floating point reg-
+isters we implement floating point operations. There is also a 1 word Status
+Flag for the floating point operations, which is analogous to the CPU Flags.
+It contains the status of the floating point operations.</p>
+
+<div style="overflow-x:auto;">
+<table cellpadding="10" border = "1" align="center"><caption align="bottom">Floating Point Stack</caption>
+<tr>
+    <td>ST0</td>
+</tr>
+<tr>
+    <td>ST1</td>
+</tr>
+<tr>
+    <td>ST2</td>
+</tr>
+<tr>
+    <td>ST3</td>
+</tr>
+<tr>
+    <td>ST4</td>
+</tr>
+<tr>
+    <td>ST5</td>
+</tr>
+<tr>
+    <td>ST6</td>
+</tr>
+<tr>
+    <td>ST7</td>
+</tr>
+</table></div>
+
+<div style="overflow-x:auto;">
+<table cellpadding="10" border = "1" align="center"><caption align="bottom">Floating Point Control Word</caption>
+<tr>
+    <td>C15</td>
+    <td>C14</td>
+    <td>C13</td>
+    <td>C12</td>
+    <td>C11</td>
+    <td>C10</td>
+    <td>C9</td>
+    <td>C8</td>
+    <td>C7</td>
+    <td>C6</td>
+    <td>C5</td>
+    <td>C4</td>
+    <td>C3</td>
+    <td>C2</td>
+    <td>C1</td>
+    <td>C0</td>
+</tr>
+</table></div>
+<h3>Floating Point Instructions</h3>
+<ol><li>Load / Store Instructions<br>
+  <ul><li><b>FLD src </b>: Loads the value of src on to the top of Floating Point stack(ie.
+  ST0). src should be either a floating point register or a single precision /
+  double precision / extended precision floating point number in memory.<br>
+  ST0 = src</li>
+  <li><b>FILD src</b> : Loads an integer from memory to ST0. src should be a word /
+  double word / quad word in memory.<br>
+  ST0 = (float) src</li>
+  <li><b>FLD1 </b>: Stores 1 to the top of Floating Point Stack.</li>
+  <li><b>FLDZ</b> : Stores 0 to the top of Floating Point Stack.</li>
+  <li><b>FST dest </b>: Stores ST0 to dest and will not pop off the value from the stack.
+  dest should be a coprocessor register or a single precision / double pre-
+  cision f.p number in memory.<br>
+  FST dest : Works as dest = ST0</li>
+  <li><b>FSTP dest </b>: Works similar to FST, it also pops off the value from ST0 after
+  storing.</li>
+  <li><b>FIST dest </b>: Converts the number present in the top of f.p stack to an inte-
+  ger and stores that into dest. dest should be a coprocessor register or
+  a single precision / double precision f.p number in memory. The way
+  the number is being rounded depend on the value of coprocessor flags.
+  But default it will be set in such a way that the number in ST0 is being
+  rounded to the nearest integer.<br>
+  dest = (float)ST0</li>
+  <li><b>FISTP dest</b> : Works similar to FIST and it will also pop off the value from
+  top of the stack.</li>
+  <li><b>FXCH STn</b> : The nth coprocessor register will be exchanged with ST0.<br>
+  ST0 <--> STn</li>
+  <li><b>FFREE STn</b> : Frees up the nth coprocessor register and marks it as empty.</li></ul></li>
+  <li>Arithmetic Operations
+  <ul><li><b>FADD src </b>: ST 0 = ST 0 + src, src should be a coprocessor register or a
+  single precision / double precision f.p number in memory.</li>
+  <li><b>FIADD src</b> : ST0 = ST0 + (float)src. This is used to add an integer with
+  ST0. src should be word or dword in memory.</li>
+  <li><b>FSUB src</b> : ST0 = ST0 - src, src should be a coprocessor register or a
+  single precision/double precision f.p number in memory.</li>
+  <li><b>FSUBR src </b>: ST0 = src - ST0, src should be a coprocessor register or a
+  single precision /double precision f.p number in memory.</li>
+  <li><b>FISUB src</b> : ST0 = ST0 - (float)src, this is used to subtract an integer
+  from ST0. src should be word or dword in memory.</li>
+  <li><b>FISUBR src </b>: ST0 = (float)src - ST0</li>
+  <li><b>FMUL src </b>: ST0 = ST0 * src, src should be a coprocessor register or a  
+  single precision /double precision f.p number in memory.</li>
+  <li><b>FIMUL src</b> : ST0 = ST0 times (float)src, src should be a coprocessor reg-
+  ister or a single precision / double precision f.p number in memory.</li>
+  <li><b>FDIV src </b>: ST0 = ST0 / src , src should be a coprocessor register or a
+  single precision /double precision f.p number in memory.</li>
+  <li><b>FDIVR src</b> : ST0 = src / ST0 , src should be a coprocessor register or a
+  single precision /double precision f.p number in memory.</li>
+  <li><b>FIDIV src </b>: ST0 = ST0 / (float)src, src should be a word or dword in
+  memory.</li>
+  <li><b>FIDIVR src</b> : ST0 = (float)src / ST 0 , src should be a word or dword in
+  memory.</li></ul></li>
+  <li>Comparison Instructions
+  <p>The usual comparison instructions FCOM and FCOMP affects the coproces-
+  sors status word but the processor cannot execute direct jump instruction
+  by checking these values. So we need to copy the coprocessor flag values to
+  the CPU flags in order to implement a jump based on result of comparison.
+  FSTSW instruction can be used to copy the value of coprocessor status word
+  to AX and then we can use SAHF to copy the value from AL to CPU flags.</p>
+  <ul><li><b>FCOM src</b> : Compares src with ST0, src should be a coprocessor register
+  or a single precision / double precision f.p number in memory.</li>
+  <li><b>FCOMP src</b> : Works similar to FCOM, it will also pop off the value from
+  ST0 after comparison.</li>
+  <li><b>FSTSW src</b> : Stores co-processor status word to a dword in memory or to
+  AX register.</li>
+  <li><b>SAHF </b>: Stores AH to CPU Flags.<br>
+  Eg:<br>
+  <span class="code">
+      <pre>
+    fld dword[var1]
+    fcomp dword[var2]
+    fstsw
+    sahf
+    ja greater
+    </pre>
+    </span>
+  <p>In Pentium Pro and later processors(like Pentium II, III, IV etc) Intel added
+  two other instructions FCOMI and FCOMIP which affects the CPU Flags
+  directly after a floating point comparison. These instructions are compara-
+  tively easier than the trivial ones.</p></li>
+  <li><b>FCOMI src</b> : Compares ST0 with src and affects the CPU Flags directly.
+  src must be coprocessor register.</li>
+  <li><b>FCOMIP</b> : Compares ST0 with src and affects the CPU Flags directly. It
+  will then pop off the value in ST0. src must be a coprocessor register.</li></ul></li>
+  <li>Miscellaneous Instructions<br>
+  <ul><li><b>FCHS</b> : ST0 = - (ST0)</li>
+  <li><b>FABS </b>: ST0 = |ST0|</li>
+  <li><b>FSQRT </b>: ST0 = &#8730;ST0</li>
+  <li><b>FSIN </b>: ST0 = sin(ST0)</li>
+  <li><b>FCOS </b>: ST0 = cos(ST0)</li>
+  <li><b>FLDPI </b> : Loads value of into ST0</li></ul></li></ol>
+NB : We use C-Functions to read or write floating point numbers from
+users. We cannot implement the read and write operations with 80h in-
+terrupt method easily.<br>
+Inorder to use C-Funtions make sure to have gcc and gcc-multilib installed.<br>
+Compile the program using:<br>
+<span class="code">
+      <pre>
+    nasm -f elf filename.asm
+    gcc -m32 filename.o -o output_filename
+    ./output_filename
+    </pre>
+    </span>
+Program to find the average of n floating point numbers<br>
+<script src="https://gist.github.com/Lakshmi-Alwin/cbddb362cbb3c4a495d4f0bf32c15ef7.js"></script>
+<br>Program to find the circumference of a circle of a given radius<br>
+<script src="https://gist.github.com/Lakshmi-Alwin/b89b0ad5d6bd8434dc25271e4c8b3a1a.js"></script>
+
+
+</div>
+   
+</div>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+}
+
+// When the user scrolls the page, execute myFunction
+window.onscroll = function() {myFunction()};
+
+// Get the header
+var header = document.getElementById("myHeader");
+
+// Get the offset position of the navbar
+var sticky = header.offsetTop;
+
+// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+} 
+</script>
+     
+</body>
+</html>
+
+
