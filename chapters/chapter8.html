@@ -70,10 +70,10 @@ IEEE-754 Standard can be summarized as follows. <br>
     <th>Exponent</th>
     <th>Fraction</th>
 </tr>
-</table></div>
-S - Sign Bit.<br>
+</table></div><br>
+S - Sign Bit.
  If the number is -ve then S = 1 else S = 0.<br>
-The number, f = (-1)Sx * (1 + 0.Fraction) * 2Exponent - Bias<br>
+The number f = (-1)<sup>S</sup> x (1 + 0.Fraction) x 2<sup>Exponent - Bias</sup><br>
 1.0 &le; |Significand| &lt; 2.0<br>
 Bias : 127 for Single Precision and 1203 for Double Precision
 
@@ -87,7 +87,7 @@ the math coprocessor was 8087. For 80286 it was 80287 and for 80386 it
 was 80387. From 80486DX onwards intel started integrating the math co-
 processor into the main processor. But still it exists like a separate unit
 inside the main processor with a separate set of instructions, separate stack
-and status flags. There hardware for floating point operations are made for
+and status flags. <br>There hardware for floating point operations are made for
 even doing operations in extended precision. But if we are using single /
 double precision numbers from memory it will be automatically converted
 while storing or loading. There are eight floating point coprocessor registers
@@ -157,11 +157,14 @@ It contains the status of the floating point operations.</p>
   double word / quad word in memory.<br>
   ST0 = (float) src</li>
   <li><b>FLD1 </b>: Stores 1 to the top of Floating Point Stack.</li>
-  <li><b>FLDZ</b> : Stores 0 to the top of Floating Point Stack.</li>
+  <li><b>FLDZ</b> : Stores 0 to the top of Floating Point Stack.<br>
+  fldz dword[temp]<br>
+  fldz ST5<br>
+</li>
   <li><b>FST dest </b>: Stores ST0 to dest and will not pop off the value from the stack.
   dest should be a coprocessor register or a single precision / double pre-
   cision f.p number in memory.<br>
-  FST dest : Works as dest = ST0</li>
+  dest = ST0</li>
   <li><b>FSTP dest </b>: Works similar to FST, it also pops off the value from ST0 after
   storing.</li>
   <li><b>FIST dest </b>: Converts the number present in the top of f.p stack to an inte-
@@ -187,10 +190,11 @@ It contains the status of the floating point operations.</p>
   single precision /double precision f.p number in memory.</li>
   <li><b>FISUB src</b> : ST0 = ST0 - (float)src, this is used to subtract an integer
   from ST0. src should be word or dword in memory.</li>
-  <li><b>FISUBR src </b>: ST0 = (float)src - ST0</li>
+  <li><b>FISUBR src </b>: ST0 = (float)src - ST0 , src should be a word or dword in
+  memory.</li>
   <li><b>FMUL src </b>: ST0 = ST0 * src, src should be a coprocessor register or a  
   single precision /double precision f.p number in memory.</li>
-  <li><b>FIMUL src</b> : ST0 = ST0 times (float)src, src should be a coprocessor reg-
+  <li><b>FIMUL src</b> : ST0 = ST0 times (float)src, src should be a coprocessor reg
   ister or a single precision / double precision f.p number in memory.</li>
   <li><b>FDIV src </b>: ST0 = ST0 / src , src should be a coprocessor register or a
   single precision /double precision f.p number in memory.</li>
@@ -238,7 +242,7 @@ It contains the status of the floating point operations.</p>
   <li><b>FSQRT </b>: ST0 = &#8730;ST0</li>
   <li><b>FSIN </b>: ST0 = sin(ST0)</li>
   <li><b>FCOS </b>: ST0 = cos(ST0)</li>
-  <li><b>FLDPI </b> : Loads value of into ST0</li></ul></li></ol>
+  <li><b>FLDPI </b> : Loads value of PI into ST0</li></ul></li></ol>
 NB : We use C-Functions to read or write floating point numbers from
 users. We cannot implement the read and write operations with 80h in-
 terrupt method easily.<br>
