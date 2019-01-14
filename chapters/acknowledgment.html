@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<title>NASM Manual NITC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Croissant+One" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Cinzel|Fjalla+One|Raleway|Roboto+Slab" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Tajawal:300" rel="stylesheet"> 
+
+<body>
+
+
+<div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left" style="width:200px;" id="mySidebar">
+  <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-home"></i> HOME</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item active"> <i class="fa fa-check-circle"></i> Acknowledgement</a>
+  <a href="chapters/chapter1.html" class="w3-bar-item w3-button nav-item "> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+  <a href="chapters/chapter2.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 2 - Introduction to NASM</a>
+  <a href="chapters/chapter3.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 3 - Basic I/O in NASM</a>
+  <a href="chapters/chapter4.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 4 - Introduction to NASM</a>
+  <a href="chapters/chapter5.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 5 - Introduction to NASM</a>
+  <a href="chapters/chapter6.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 6 - Introduction to NASM</a>
+  <a href="chapters/chapter7.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 7 - Introduction to NASM</a>
+  <a href="index.html" class="w3-bar-item w3-button nav-item"> <i class="fa fa-book"></i> Chapter 1 - Introduction to NASM</a>
+
+</div>
+
+<div class="w3-main" style="margin-left:200px; ">
+
+<div class="w3-teal" id="myHeader">
+  <button class="w3-button w3-teal w3-xlarge w3-hide-large" onclick="w3_open()">&#9776;</button>
+  <div class="w3-container">
+    <h1 id="headerText" style="">NASM Manual NITC</h1>
+  </div>
+</div>
+
+<div class="w3-container">
+  <h1 align="center">Acknowledgement</h1>
+  <hr class="style-eight" max-width="50%" style="margin-left: 40%; margin-right: 40%">
+  <hr width="100%" align="center" style="margin-left: 100%; margin-right: 30%">  
+
+  <p id="mainText">I would like to express my gratitude to Saidalavy Kalady Sir and Jayaraj P B
+Sir (Assistant Professors, Dept: of CSE, NIT Calicut) for guiding me throughout
+while making this reference material on NASM Assembly language programming.
+Without their constant support and guidance this work would not have been possible. Thanks to Lyla B Das madam (Associate Professor, Dept: of ECE, NIT
+Calicut) for encouraging me to bring out an updated version of this work. I would
+also wish to thank Meera Sudharman, my classmate who helped me in verifying
+the contents of this document. Special thanks are due to Govind R and Sonia
+V Mathew (BTech 2011-2015 Batch) for updating the contents and adding more
+working examples to it. I am extremely grateful to Dheeraj Mohan, Nikhil Sojan, Jyothsna Shaji, Lakshmi Alwin, Vrindha K, Nileena P.C., Sanju Alex Jacob and Naveen Babu (2016 - 2020 batch) for restructuring the manual with different learning strategies and working examples. I want to Thanks to all my dear batch mates and juniors who have
+been supporting me through the work of this and for providing me with their valu-
+able suggestions.<br><br>
+-Muhammed Yazar</p>
+
+</div>
+
+</div>
+
+<script>
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+}
+
+// When the user scrolls the page, execute myFunction
+window.onscroll = function() {myFunction()};
+
+// Get the header
+var header = document.getElementById("myHeader");
+
+// Get the offset position of the navbar
+var sticky = header.offsetTop;
+
+// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+} 
+</script>
+     
+</body>
+</html>
