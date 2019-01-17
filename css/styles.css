@@ -5,10 +5,15 @@
 #mySidebar {
     background-color: #032632 !important;
     color: white;
+    font-size: 1.2em;
 }
 
 .w3-button {
 
+}
+
+body {
+  font-size: 0.9em;
 }
 
 .active, .w3-button:hover {
@@ -110,6 +115,24 @@ border-radius: 5px;
   text-align: justify;
   margin: 8px !important;
 }
+
+body,p{
+  font-size: 0.9em;
+}
+
+#mySidebar {
+    font-size: 1.1em;
+}
+
+h1, h2, h3{
+
+    font-family: 'Roboto Slab', serif;
+    color: #252839;
+    
+
+}
+
+
 }
 
 
