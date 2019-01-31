@@ -116,8 +116,8 @@ border-radius: 5px;
   margin: 8px !important;
 }
 
-body,p{
-  font-size: 0.9em;
+body,p,tr{
+  font-size: 0.9em !important;
 }
 
 #mySidebar {
